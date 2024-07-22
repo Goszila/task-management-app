@@ -6,8 +6,21 @@ import InProgress from './screens/InProgress';
 import Done from './screens/Done';
 import { FontAwesome6 } from '@expo/vector-icons';
 import TaskProvider from './context/TaskProvider';
+import TaskDetail from './screens/TaskDetail';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
+
+const SettingsStack = createNativeStackNavigator();
+
+function SettingsStackScreen() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name="main-todo" component={Todo} options={{ headerShown: false }}/>
+      <SettingsStack.Screen name="NEW" component={TaskDetail} options={{ headerBackTitle: 'BACK' }}/>
+    </SettingsStack.Navigator>
+  );
+}
 
 export default function App() {
   return (
@@ -16,7 +29,7 @@ export default function App() {
         <Tab.Navigator>
           <Tab.Screen
             name="TODO"
-            component={Todo}
+            component={SettingsStackScreen}
             options={{
               tabBarLabel: 'TODO',
               tabBarIcon: ({ color, size }) => (
@@ -38,7 +51,7 @@ export default function App() {
             name="DONE"
             component={Done}
             options={{
-              tabBarLabel: 'IN PROGRESS',
+              tabBarLabel: 'DONE',
               tabBarIcon: ({ color, size }) => (
                 <FontAwesome6 name="check-double" color={color} size={size} />
               )
@@ -46,7 +59,7 @@ export default function App() {
           />
         </Tab.Navigator>
       </NavigationContainer>
-    </TaskProvider>
+    </TaskProvider >
   );
 }
 
