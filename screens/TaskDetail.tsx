@@ -90,7 +90,7 @@ export default function TaskDetail({ route, navigation }: { route: any, navigati
   }
   return (
     <SafeAreaView style={styles.container}>
-      {status && (
+      {id && (
         <View style={styles.statusbar}>
           <Text style={{ color: '#000000', fontWeight: 'bold' }}>STATUS: {status}</Text>
         </View>
