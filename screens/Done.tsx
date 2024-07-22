@@ -2,8 +2,9 @@ import { FlatList, Text, View } from 'react-native'
 import React, { useContext } from 'react'
 import TaskCard from '../components/TaskCard'
 import { useGetTasks } from '../hooks'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-export default function Done() {
+export default function Done({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
   const tasks = useGetTasks({ status: 'DONE' })
 
   return (
@@ -11,7 +12,7 @@ export default function Done() {
       <FlatList
         data={tasks}
         renderItem={({ item }) => (
-          <TaskCard title={item.title} description={item.description} />
+          <TaskCard navigation={navigation} payload={item} />
         )}
         keyExtractor={(item) => item.id}
         ListEmptyComponent={<Text style={{ alignSelf: "center", fontSize: 20 }}>Empty</Text>}

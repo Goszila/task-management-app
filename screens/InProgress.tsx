@@ -1,17 +1,18 @@
-import { FlatList, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import TaskCard from '../components/TaskCard'
 import { useGetTasks } from '../hooks'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-export default function InProgress() {
+export default function InProgress({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
   const tasks = useGetTasks({ status: 'INPROGRESS' })
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={tasks}
         renderItem={({ item }) => (
-          <TaskCard title={item.title} description={item.description} />
+          <TaskCard navigation={navigation} payload={item} />
         )}
         keyExtractor={(item) => item.id}
         ListEmptyComponent={<Text style={{ alignSelf: "center", fontSize: 20 }}>Empty</Text>}
@@ -19,3 +20,12 @@ export default function InProgress() {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F2F2F7',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+});

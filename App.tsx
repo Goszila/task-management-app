@@ -13,12 +13,30 @@ const Tab = createBottomTabNavigator();
 
 const SettingsStack = createNativeStackNavigator();
 
-function SettingsStackScreen() {
+function TodoStackScreen() {
   return (
     <SettingsStack.Navigator>
-      <SettingsStack.Screen name="main-todo" component={Todo} options={{ headerShown: false }}/>
-      <SettingsStack.Screen name="NEW" component={TaskDetail} options={{ headerBackTitle: 'BACK' }}/>
-      <SettingsStack.Screen name="DETAIL" component={TaskDetail} options={{ headerBackTitle: 'BACK' }}/>
+      <SettingsStack.Screen name="main-todo" component={Todo} options={{ headerShown: false }} />
+      <SettingsStack.Screen name="NEW" component={TaskDetail} options={{ headerBackTitle: 'BACK' }} />
+      <SettingsStack.Screen name="DETAIL" component={TaskDetail} options={{ headerBackTitle: 'BACK' }} />
+    </SettingsStack.Navigator>
+  );
+}
+
+function InProgressStackScreen() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name="main-inprogress" component={InProgress} options={{ headerShown: false }} />
+      <SettingsStack.Screen name="DETAIL" component={TaskDetail} options={{ headerBackTitle: 'BACK' }} />
+    </SettingsStack.Navigator>
+  );
+}
+
+function DoneStackScreen() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name="main-inprogress" component={Done} options={{ headerShown: false }} />
+      <SettingsStack.Screen name="DETAIL" component={TaskDetail} options={{ headerBackTitle: 'BACK' }} />
     </SettingsStack.Navigator>
   );
 }
@@ -30,7 +48,7 @@ export default function App() {
         <Tab.Navigator>
           <Tab.Screen
             name="TODO"
-            component={SettingsStackScreen}
+            component={TodoStackScreen}
             options={{
               tabBarLabel: 'TODO',
               tabBarIcon: ({ color, size }) => (
@@ -40,7 +58,7 @@ export default function App() {
           />
           <Tab.Screen
             name="IN PROGRESS"
-            component={InProgress}
+            component={InProgressStackScreen}
             options={{
               tabBarLabel: 'IN PROGRESS',
               tabBarIcon: ({ color, size }) => (
@@ -50,7 +68,7 @@ export default function App() {
           />
           <Tab.Screen
             name="DONE"
-            component={Done}
+            component={DoneStackScreen}
             options={{
               tabBarLabel: 'DONE',
               tabBarIcon: ({ color, size }) => (

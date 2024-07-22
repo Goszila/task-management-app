@@ -9,6 +9,12 @@ type ITaskCardProps = {
 
 export default function TaskCard({ navigation, payload }: ITaskCardProps) {
   const { title, description } = payload
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length > maxLength) {
+      return <Text>{text.substring(0, maxLength)}<Text style={{ fontWeight: 'bold' }}> ...more</Text></Text>
+    }
+    return text
+  }
   return (
     <TouchableOpacity
       style={styles.container}
@@ -28,7 +34,7 @@ export default function TaskCard({ navigation, payload }: ITaskCardProps) {
         id: payload.id
       })}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.detail}>{description}</Text>
+      <Text style={styles.detail}>{truncateText(description, 110)}</Text>
     </TouchableOpacity>
   )
 }
@@ -62,6 +68,12 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     marginTop: 5,
     color: 'gray',
+    ...(Platform.OS === 'android' && { paddingBottom: 30 })
+  },
+  more: {
+    fontSize: 16,
+    fontWeight: 'normal',
+    color: 'blue',
     ...(Platform.OS === 'android' && { paddingBottom: 30 })
   }
 })
