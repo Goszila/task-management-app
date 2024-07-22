@@ -1,7 +1,7 @@
 import { FlatList, Text, View } from 'react-native'
 import React, { useContext } from 'react'
 import TaskCard from '../components/TaskCard'
-import { useGetTasks } from '../Hooks'
+import { useGetTasks } from '../hooks'
 
 export default function Done() {
   const tasks = useGetTasks({ status: 'DONE' })

@@ -1,7 +1,7 @@
 import { FlatList, Text, View } from 'react-native'
 import React from 'react'
 import TaskCard from '../components/TaskCard'
-import { useGetTasks } from '../Hooks'
+import { useGetTasks } from '../hooks'
 
 export default function InProgress() {
   const tasks = useGetTasks({ status: 'INPROGRESS' })

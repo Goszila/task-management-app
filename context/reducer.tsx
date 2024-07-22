@@ -3,7 +3,7 @@ const reducer = (state: TaskType[], action: ActionType): TaskType[] => {
   switch (action.type) {
     case "ADD":
       const { payload } = action
-      return [...state, { ...payload, id: Date.now().toString(), status: 'TODO' }]
+      return [...state, { ...payload, status: 'TODO' }]
     case "DELETE":
       return [...state]
     case "UPDATE":
