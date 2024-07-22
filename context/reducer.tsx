@@ -8,8 +8,7 @@ const reducer = (state: TaskType[], action: ActionType): TaskType[] => {
       state[taskIndex] = { ...state[taskIndex], ...payload };
       return [...state];
     case "DELETE":
-      state = [...state];
-      break;
+      return state.filter((task) => task.id !== payload.id)
     default:
       state = state;
       break

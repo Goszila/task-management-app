@@ -1,14 +1,15 @@
-import { Alert, Button, SafeAreaView, StyleSheet, TextInput, View, Text } from 'react-native'
-import React, { Dispatch, useContext, useEffect, useState } from 'react'
+import { Alert, Button, SafeAreaView, StyleSheet, TextInput, View, Text, Platform } from 'react-native'
+import React, { Dispatch, useContext, useEffect, useRef, useState } from 'react'
 import { useCreateTask } from '../hooks'
 import { DataContext } from '../context/TaskProvider'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { Picker } from '@react-native-picker/picker';
 
 export default function TaskDetail({ route, navigation }: { route: any, navigation: NativeStackNavigationProp<any> }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [formError, setFormError] = useState(false)
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState<TaskStatus>('TODO')
 
   const {
     tasks,
@@ -22,7 +23,7 @@ export default function TaskDetail({ route, navigation }: { route: any, navigati
       if (task) {
         setTitle(task.title)
         setDescription('' + task.description)
-        setStatus('' + task.status)
+        setStatus(task.status)
       }
     }
   }, [])
@@ -38,7 +39,8 @@ export default function TaskDetail({ route, navigation }: { route: any, navigati
         payload: {
           id,
           title,
-          description
+          description,
+          status
         }
       })
     } else {
@@ -59,6 +61,33 @@ export default function TaskDetail({ route, navigation }: { route: any, navigati
     )
   }
 
+  const handleDelete = () => {
+    if (!id) return
+    Alert.alert(
+      'Delete Task',
+      'Are you sure?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            dispatch({
+              type: 'DELETE',
+              payload: {
+                id
+              }
+            })
+            navigation.goBack()
+          }
+        },
+      ],
+      { cancelable: false }
+    )
+  }
   return (
     <SafeAreaView style={styles.container}>
       {status && (
@@ -89,11 +118,34 @@ export default function TaskDetail({ route, navigation }: { route: any, navigati
           value={description}
           onChangeText={(value) => setDescription(value)}
         />
-        <Button
-          title='SAVE'
-          color='#007AFF'
-          onPress={handleSave}
-        />
+        {id && (
+          <SafeAreaView>
+            <Picker
+              selectedValue={status}
+              onValueChange={(itemValue, itemIndex) =>
+                setStatus(itemValue)
+              }>
+              <Picker.Item label="TODO" value="TODO" />
+              <Picker.Item label="IN PROGRESS" value="INPROGRESS" />
+              <Picker.Item label="DONE" value="DONE" />
+            </Picker>
+          </SafeAreaView>
+        )}
+
+        <SafeAreaView style={styles.buttonContainer}>
+          <Button
+            title='SAVE'
+            color='#007AFF'
+            onPress={handleSave}
+          />
+          {id && (
+            <Button
+              title='DELETE'
+              color='red'
+              onPress={handleDelete}
+            />
+          )}
+        </SafeAreaView>
       </View>
     </SafeAreaView>
   )
@@ -135,8 +187,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
-    marginVertical: 10,
+    // marginVertical: 10,
     textAlignVertical: 'top',
-    fontSize: 16
+    fontSize: 16,
   },
+  buttonContainer: {
+    marginVertical: 10,
+    ...(Platform.OS === 'android' && { gap: 10 })
+  }
 })
