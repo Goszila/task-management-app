@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React, { useContext } from 'react'
 import TaskCard from '../components/TaskCard'
 import { useGetTasks } from '../hooks'
@@ -8,7 +8,7 @@ export default function Done({ navigation }: { navigation: NativeStackNavigation
   const tasks = useGetTasks({ status: 'DONE' })
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={tasks}
         renderItem={({ item }) => (
@@ -20,3 +20,10 @@ export default function Done({ navigation }: { navigation: NativeStackNavigation
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F2F2F7',
+  }
+});
