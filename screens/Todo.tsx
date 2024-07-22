@@ -13,12 +13,12 @@ export default function Todo({ navigation }: { navigation: NativeStackNavigation
       <FlatList
         data={tasks}
         renderItem={({ item }) => (
-          <TaskCard title={item.title} description={item.description} />
+          <TaskCard navigation={navigation} payload={item} />
         )}
         keyExtractor={(item) => item.id}
         ListEmptyComponent={<Text style={{ alignSelf: "center", fontSize: 20 }}>Empty</Text>}
       />
-      <FloatingButton navigation={navigation}/>
+      <FloatingButton navigation={navigation} />
     </View>
   )
 }

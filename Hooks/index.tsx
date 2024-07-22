@@ -16,8 +16,9 @@ type UseCreateTaskType = {
 }
 export const useCreateTask = (props: UseCreateTaskType) => {
   return props.dispatch({
-    type: 'ADD', payload: {
-      id: uuidV4(),
+    type: 'ADD',
+    payload: {
+      id: uuidV4().toString(),
       title: props.title,
       description: props.description
     }

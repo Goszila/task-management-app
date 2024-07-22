@@ -1,28 +1,54 @@
-import { Alert, Button, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { Dispatch, useContext, useState } from 'react'
+import { Alert, Button, SafeAreaView, StyleSheet, TextInput, View, Text } from 'react-native'
+import React, { Dispatch, useContext, useEffect, useState } from 'react'
 import { useCreateTask } from '../hooks'
 import { DataContext } from '../context/TaskProvider'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-export default function TaskDetail({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
+export default function TaskDetail({ route, navigation }: { route: any, navigation: NativeStackNavigationProp<any> }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [formError, setFormError] = useState(false)
+  const [status, setStatus] = useState('')
 
   const {
+    tasks,
     dispatch
-  }: { dispatch: Dispatch<ActionType> } = useContext(DataContext)
+  }: { tasks: TaskType[], dispatch: Dispatch<ActionType> } = useContext(DataContext)
+
+  const id = route.params?.id
+  useEffect(() => {
+    if (id) {
+      const task = tasks.find((task) => task.id === id)
+      if (task) {
+        setTitle(task.title)
+        setDescription('' + task.description)
+        setStatus('' + task.status)
+      }
+    }
+  }, [])
 
   const handleSave = () => {
     if (!title) {
       setFormError(true)
+      return
     }
-    setFormError(false)
-    useCreateTask({
-      title,
-      description,
-      dispatch
-    })
+    if (id) {
+      dispatch({
+        type: 'UPDATE',
+        payload: {
+          id,
+          title,
+          description
+        }
+      })
+    } else {
+      useCreateTask({
+        title,
+        description,
+        dispatch
+      })
+    }
+
     Alert.alert(
       'Create Task',
       'Task has been created',
@@ -35,6 +61,11 @@ export default function TaskDetail({ navigation }: { navigation: NativeStackNavi
 
   return (
     <SafeAreaView style={styles.container}>
+      {status && (
+        <View style={styles.statusbar}>
+          <Text style={{ color: '#000000', fontWeight: 'bold' }}>STATUS: {status}</Text>
+        </View>
+      )}
       <View style={styles.form}>
         <TextInput
           autoCapitalize='none'
@@ -42,8 +73,9 @@ export default function TaskDetail({ navigation }: { navigation: NativeStackNavi
           placeholder='Task Title*'
           keyboardType='default'
           style={[styles.input, formError && styles.inputError]}
+          value={title}
           onChangeText={(value) => {
-            if(!value) setFormError(true)
+            if (!value) setFormError(true)
             setTitle(value)
           }}
         />
@@ -54,6 +86,7 @@ export default function TaskDetail({ navigation }: { navigation: NativeStackNavi
           keyboardType='default'
           multiline={true}
           style={styles.textarea}
+          value={description}
           onChangeText={(value) => setDescription(value)}
         />
         <Button
@@ -72,6 +105,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'flex-start',
+  },
+  statusbar: {
+    width: '100%',
+    padding: 10,
+    backgroundColor: '#70FFEC',
+    alignItems: 'center',
   },
   form: {
     width: '100%',

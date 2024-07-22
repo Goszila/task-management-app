@@ -1,16 +1,20 @@
 const reducer = (state: TaskType[], action: ActionType): TaskType[] => {
-  console.log({ state, action })
-  switch (action.type) {
+  const { payload, type } = action;
+  switch (type) {
     case "ADD":
-      const { payload } = action
-      return [...state, { ...payload, status: 'TODO' }]
-    case "DELETE":
-      return [...state]
+      return [...state, { ...payload, status: 'TODO' }];
     case "UPDATE":
-      return [...state]
+      const taskIndex = state.findIndex((task) => task.id === payload.id);
+      state[taskIndex] = { ...state[taskIndex], ...payload };
+      return [...state];
+    case "DELETE":
+      state = [...state];
+      break;
     default:
-      return state
+      state = state;
+      break
   }
+  return state;
 }
 
 export default reducer

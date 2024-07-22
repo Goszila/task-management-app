@@ -1,16 +1,35 @@
-import { Platform, StyleSheet, Text, View } from 'react-native'
+import { Alert, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-type TaskCardProps = {
-  title: string
-  description?: string
+type ITaskCardProps = {
+  navigation: NativeStackNavigationProp<any>
+  payload: TaskType
 }
-export default function TaskCard({ title, description = '' }: TaskCardProps) {
+
+export default function TaskCard({ navigation, payload }: ITaskCardProps) {
+  const { title, description } = payload
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onLongPress={() => Alert.alert(
+        'Delete Task',
+        'Are you sure?',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ],
+      )}
+      onPress={() => navigation.navigate('DETAIL', {
+        id: payload.id
+      })}>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.detail}>{description}</Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 

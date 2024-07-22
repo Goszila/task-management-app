@@ -18,6 +18,7 @@ function SettingsStackScreen() {
     <SettingsStack.Navigator>
       <SettingsStack.Screen name="main-todo" component={Todo} options={{ headerShown: false }}/>
       <SettingsStack.Screen name="NEW" component={TaskDetail} options={{ headerBackTitle: 'BACK' }}/>
+      <SettingsStack.Screen name="DETAIL" component={TaskDetail} options={{ headerBackTitle: 'BACK' }}/>
     </SettingsStack.Navigator>
   );
 }
@@ -62,12 +63,3 @@ export default function App() {
     </TaskProvider >
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F2F2F7',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
