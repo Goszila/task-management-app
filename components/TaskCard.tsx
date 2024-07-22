@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Platform, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 type TaskCardProps = {
@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     height: 120,
-    padding: 20
+    padding: 20,
+    overflow: 'hidden'
   },
   title: {
     fontSize: 20,
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'normal',
     marginTop: 5,
-    color: 'gray'
+    color: 'gray',
+    ...(Platform.OS === 'android' && { paddingBottom: 30 })
   }
 })
