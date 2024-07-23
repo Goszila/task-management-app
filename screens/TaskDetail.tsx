@@ -104,7 +104,7 @@ export default function TaskDetail({ route, navigation }: { route: any, navigati
           style={[styles.input, formError && styles.inputError]}
           value={title}
           onChangeText={(value) => {
-            if (!value) setFormError(true)
+            setFormError(!value)
             setTitle(value)
           }}
         />

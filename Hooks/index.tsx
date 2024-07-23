@@ -11,7 +11,7 @@ export const useGetTasks = ({ status }: { status: TaskStatus }): TaskType[] => {
 
 type UseCreateTaskType = {
   title: string
-  description?: string
+  description: string
   dispatch: Dispatch<ActionType>
 }
 export const useCreateTask = (props: UseCreateTaskType) => {
