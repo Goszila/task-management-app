@@ -1,6 +1,7 @@
 import { Dispatch, useContext } from 'react'
 import { DataContext } from '../context/TaskProvider'
 import { uuidV4 } from '../utils/uuid'
+import { Text } from 'react-native'
 
 export const useGetTasks = ({ status }: { status: TaskStatus }): TaskType[] => {
   const {
@@ -23,4 +24,18 @@ export const useCreateTask = (props: UseCreateTaskType) => {
       description: props.description
     }
   })
+}
+
+export const useTruncateText = (text: string, maxLength: number) => {
+  if (text.length > maxLength) {
+    return (
+      <Text>
+        {text.substring(0, maxLength)}
+        <Text style={{ fontWeight: 'bold' }}> .
+          ..more
+        </Text>
+      </Text>
+    )
+  }
+  return text
 }

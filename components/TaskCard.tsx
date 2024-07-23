@@ -1,20 +1,15 @@
 import { Alert, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useTruncateText } from '../hooks'
 
-type ITaskCardProps = {
+type TaskCardPropsType = {
   navigation: NativeStackNavigationProp<any>
   payload: TaskType
 }
 
-export default function TaskCard({ navigation, payload }: ITaskCardProps) {
+export default function TaskCard({ navigation, payload }: TaskCardPropsType) {
   const { title, description } = payload
-  const truncateText = (text: string, maxLength: number) => {
-    if (text.length > maxLength) {
-      return <Text>{text.substring(0, maxLength)}<Text style={{ fontWeight: 'bold' }}> ...more</Text></Text>
-    }
-    return text
-  }
   return (
     <TouchableOpacity
       style={styles.container}
@@ -34,7 +29,7 @@ export default function TaskCard({ navigation, payload }: ITaskCardProps) {
         id: payload.id
       })}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.detail}>{truncateText(description, 110)}</Text>
+      <Text style={styles.detail}>{useTruncateText(description, 120)}</Text>
     </TouchableOpacity>
   )
 }
