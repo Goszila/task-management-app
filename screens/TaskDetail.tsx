@@ -1,5 +1,5 @@
 import { Alert, Button, SafeAreaView, StyleSheet, TextInput, View, Text, Platform } from 'react-native'
-import React, { Dispatch, useContext, useEffect, useRef, useState } from 'react'
+import React, { Dispatch, useContext, useEffect, useState } from 'react'
 import { useCreateTask } from '../hooks'
 import { DataContext } from '../context/TaskProvider'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
