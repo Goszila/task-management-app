@@ -4,6 +4,7 @@ import TaskCard from '../components/TaskCard'
 import { useGetTasks } from '../hooks'
 import FloatingButton from '../components/FloatingButton'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import styles from '../styles/screen'
 
 export default function Todo({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
   const tasks = useGetTasks({ status: 'TODO' })
@@ -22,10 +23,3 @@ export default function Todo({ navigation }: { navigation: NativeStackNavigation
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F2F2F7',
-  }
-});

@@ -3,6 +3,7 @@ import React from 'react'
 import TaskCard from '../components/TaskCard'
 import { useGetTasks } from '../hooks'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import styles from '../styles/screen'
 
 export default function Done({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
   const tasks = useGetTasks({ status: 'DONE' })
@@ -20,10 +21,3 @@ export default function Done({ navigation }: { navigation: NativeStackNavigation
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F2F2F7',
-  }
-});
