@@ -4,7 +4,7 @@ import TaskCard from '../components/TaskCard'
 import { useGetTasks } from '../hooks'
 import FloatingButton from '../components/FloatingButton'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import styles from '../styles/screen'
+import styles from '../styles/Screen'
 
 export default function Todo({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
   const tasks = useGetTasks({ status: 'TODO' })

@@ -1,7 +1,8 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { FontAwesome } from '@expo/vector-icons';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import styles from '../styles/FloatingButton'
 
 export default function FloatingButton({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
   return (
@@ -10,14 +11,3 @@ export default function FloatingButton({ navigation }: { navigation: NativeStack
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    position: 'absolute',
-    right: 20,
-    bottom: 20,
-    backgroundColor: '#007bff',
-    borderRadius: 50,
-    padding: 16,
-  },
-});

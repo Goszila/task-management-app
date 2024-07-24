@@ -6,7 +6,11 @@ export const DataContext = React.createContext<{
   dispatch: Dispatch<ActionType>
 }>({ tasks: [], dispatch: () => { } });
 
-export default function TaskProvider({ children }: any) {
+type PropsType = {
+  children: React.ReactNode
+}
+
+export default function TaskProvider({ children }: PropsType) {
   const defaultValues: TaskType[] = []
   const [allTask, dispatch] = useReducer(reducer, defaultValues)
   return (

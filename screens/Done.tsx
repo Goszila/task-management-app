@@ -3,7 +3,7 @@ import React from 'react'
 import TaskCard from '../components/TaskCard'
 import { useGetTasks } from '../hooks'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import styles from '../styles/screen'
+import styles from '../styles/Screen'
 
 export default function Done({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
   const tasks = useGetTasks({ status: 'DONE' })

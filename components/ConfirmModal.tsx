@@ -1,4 +1,4 @@
-import { Alert, StyleSheet } from 'react-native'
+import { Alert } from 'react-native'
 
 type ConfirmModalType = AlertTextType & {
   confirmFunction: () => void
@@ -33,5 +33,3 @@ export default function ConfirmModal({
     )
   )
 }
-
-const styles = StyleSheet.create({})

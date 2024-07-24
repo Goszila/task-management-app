@@ -7,10 +7,9 @@ import { Picker } from '@react-native-picker/picker';
 import ResponseAlert from '../components/ResponseAlert'
 import ConfirmModal from '../components/ConfirmModal'
 import styles from '../styles/TaskDetail'
-import { RouteProp } from '@react-navigation/native'
 
 type TaskDetailType = {
-  route: RouteProp<{ params: { id: string } }>
+  route: any
   navigation: NativeStackNavigationProp<any>
 }
 

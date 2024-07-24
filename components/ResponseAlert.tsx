@@ -1,4 +1,4 @@
-import { Alert, StyleSheet } from 'react-native'
+import { Alert } from 'react-native'
 
 type Props = {
   title: string
@@ -17,5 +17,3 @@ export default function ResponseAlert({ title, detailMessage, cbFunction }: Prop
     )
   )
 }
-
-const styles = StyleSheet.create({})
