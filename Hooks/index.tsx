@@ -26,6 +26,22 @@ export const useCreateTask = (props: UseCreateTaskType) => {
   })
 }
 
+type UseUpdateTaskType = {
+  dispatch: Dispatch<ActionType>
+} & TaskType
+
+export const useUpdateTask = (props: UseUpdateTaskType) => {
+  return props.dispatch({
+    type: 'UPDATE',
+    payload: {
+      id: props.id,
+      title: props.title,
+      description: props.description,
+      status: props.status
+    }
+  })
+}
+
 export const useTruncateText = (text: string, maxLength: number) => {
   if (text.length > maxLength) {
     return (
@@ -38,4 +54,17 @@ export const useTruncateText = (text: string, maxLength: number) => {
     )
   }
   return text
+}
+
+type UseDeleteTaskType = {
+  dispatch: Dispatch<ActionType>
+  id: string
+}
+export const useDeleteTask = ({ dispatch, id }: UseDeleteTaskType) => {
+  dispatch({
+    type: 'DELETE',
+    payload: {
+      id
+    }
+  })
 }

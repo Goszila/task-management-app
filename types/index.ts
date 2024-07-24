@@ -28,4 +28,10 @@ type TaskType = {
   status: TaskStatus;
 }
 
+type AlertTextType = {
+  title: string;
+  detailMessage: string;
+  cbFunction: () => void
+}
+
 type TaskStatus = 'TODO' | 'INPROGRESS' | 'DONE'

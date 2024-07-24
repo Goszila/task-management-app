@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
-import React, { useContext } from 'react'
+import React from 'react'
 import TaskCard from '../components/TaskCard'
 import { useGetTasks } from '../hooks'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'

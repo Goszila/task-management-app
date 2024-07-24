@@ -1,9 +1,11 @@
-import { Alert, Button, SafeAreaView, StyleSheet, TextInput, View, Text, Platform } from 'react-native'
-import React, { Dispatch, useContext, useEffect, useState } from 'react'
-import { useCreateTask } from '../hooks'
+import { Button, SafeAreaView, StyleSheet, TextInput, View, Text, Platform } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import { useCreateTask, useDeleteTask } from '../hooks'
 import { DataContext } from '../context/TaskProvider'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Picker } from '@react-native-picker/picker';
+import ResponseAlert from '../components/ResponseAlert'
+import ConfirmModal from '../components/ConfirmModal'
 
 export default function TaskDetail({ route, navigation }: { route: any, navigation: NativeStackNavigationProp<any> }) {
   const [title, setTitle] = useState('')
@@ -11,10 +13,7 @@ export default function TaskDetail({ route, navigation }: { route: any, navigati
   const [formError, setFormError] = useState(false)
   const [status, setStatus] = useState<TaskStatus>('TODO')
 
-  const {
-    tasks,
-    dispatch
-  }: { tasks: TaskType[], dispatch: Dispatch<ActionType> } = useContext(DataContext)
+  const { tasks, dispatch } = useContext(DataContext)
 
   const id = route.params?.id
   useEffect(() => {
@@ -33,6 +32,7 @@ export default function TaskDetail({ route, navigation }: { route: any, navigati
       setFormError(true)
       return
     }
+    let successMessage = ''
     if (id) {
       dispatch({
         type: 'UPDATE',
@@ -43,51 +43,28 @@ export default function TaskDetail({ route, navigation }: { route: any, navigati
           status
         }
       })
+      successMessage = 'Task has been updated successfully'
     } else {
-      useCreateTask({
-        title,
-        description,
-        dispatch
-      })
+      useCreateTask({ title, description, dispatch })
+      successMessage = 'Task has been created successfully'
     }
-
-    Alert.alert(
-      'Create Task',
-      'Task has been created',
-      [
-        { text: 'OK', onPress: () => navigation.goBack() }
-      ],
-      { cancelable: false }
-    )
+    ResponseAlert({
+      title: 'Success',
+      detailMessage: successMessage,
+      cbFunction: () => navigation.goBack()
+    })
   }
 
   const handleDelete = () => {
     if (!id) return
-    Alert.alert(
-      'Delete Task',
-      'Are you sure?',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => {
-            dispatch({
-              type: 'DELETE',
-              payload: {
-                id
-              }
-            })
-            navigation.goBack()
-          }
-        },
-      ],
-      { cancelable: false }
-    )
+    ConfirmModal({
+      title: 'Delete Task',
+      detailMessage: 'Are you sure?',
+      cbFunction: () => navigation.goBack(),
+      confirmFunction: () => useDeleteTask({ dispatch, id }),
+    })
   }
+
   return (
     <SafeAreaView style={styles.container}>
       {id && (
@@ -187,7 +164,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
-    // marginVertical: 10,
     textAlignVertical: 'top',
     fontSize: 16,
   },
