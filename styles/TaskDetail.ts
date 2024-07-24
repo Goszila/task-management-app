@@ -42,5 +42,9 @@ export default StyleSheet.create({
   buttonContainer: {
     marginVertical: 10,
     ...(Platform.OS === 'android' && { gap: 10 })
+  },
+  statusbarText: {
+    color: '#000000',
+    fontWeight: 'bold'
   }
 })
