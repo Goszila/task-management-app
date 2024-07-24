@@ -1,9 +1,6 @@
-import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import Todo from './screens/Todo';
-import InProgress from './screens/InProgress';
-import Done from './screens/Done';
+import TaskList from './screens/TaskList';
 import { FontAwesome6 } from '@expo/vector-icons';
 import TaskProvider from './context/TaskProvider';
 import TaskDetail from './screens/TaskDetail';
@@ -16,7 +13,7 @@ const SettingsStack = createNativeStackNavigator();
 function TodoStackScreen() {
   return (
     <SettingsStack.Navigator>
-      <SettingsStack.Screen name="main-todo" component={Todo} options={{ headerShown: false }} />
+      <SettingsStack.Screen name="todo" component={TaskList} options={{ headerShown: false }} />
       <SettingsStack.Screen name="NEW" component={TaskDetail} options={{ headerBackTitle: 'BACK' }} />
       <SettingsStack.Screen name="DETAIL" component={TaskDetail} options={{ headerBackTitle: 'BACK' }} />
     </SettingsStack.Navigator>
@@ -26,7 +23,7 @@ function TodoStackScreen() {
 function InProgressStackScreen() {
   return (
     <SettingsStack.Navigator>
-      <SettingsStack.Screen name="main-inprogress" component={InProgress} options={{ headerShown: false }} />
+      <SettingsStack.Screen name="inprogress" component={TaskList} options={{ headerShown: false }} />
       <SettingsStack.Screen name="DETAIL" component={TaskDetail} options={{ headerBackTitle: 'BACK' }} />
     </SettingsStack.Navigator>
   );
@@ -35,7 +32,7 @@ function InProgressStackScreen() {
 function DoneStackScreen() {
   return (
     <SettingsStack.Navigator>
-      <SettingsStack.Screen name="main-inprogress" component={Done} options={{ headerShown: false }} />
+      <SettingsStack.Screen name="done" component={TaskList} options={{ headerShown: false }} />
       <SettingsStack.Screen name="DETAIL" component={TaskDetail} options={{ headerBackTitle: 'BACK' }} />
     </SettingsStack.Navigator>
   );
