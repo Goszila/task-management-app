@@ -23,7 +23,7 @@ export default function TaskList({ navigation, route }: TaskDetailType) {
           <TaskCard navigation={navigation} payload={item} />
         )}
         keyExtractor={(item) => item.id}
-        ListEmptyComponent={<Text style={{ alignSelf: "center", fontSize: 20 }}>Empty</Text>}
+        ListEmptyComponent={<Text style={styles.emptyText}>Empty</Text>}
       />
       {status === 'TODO' && <FloatingButton navigation={navigation} />}
     </View>
