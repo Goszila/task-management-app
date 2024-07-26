@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useDeleteTask, useTruncateText, useUpdateTask } from '../hooks'
 import styles from '../styles/TaskCard'
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons'
 import { DataContext } from '../context/TaskProvider'
 import ConfirmModal from './ConfirmModal'
 import { forwardStatus } from '../utils/movementStatus'

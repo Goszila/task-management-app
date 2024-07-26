@@ -1,41 +1,41 @@
 type ActionType = AddTaskType | UpdateTaskType | DeleteTaskType | ResetTaskType
 
 type AddTaskType = {
-  type: 'ADD';
+  type: 'ADD'
   payload: {
-    id: string;
-    title: string;
-    description: string;
-  };
+    id: string
+    title: string
+    description: string
+  }
 }
 
 type UpdateTaskType = {
-  type: 'UPDATE';
-  payload: TaskType;
+  type: 'UPDATE'
+  payload: TaskType
 }
 
 type DeleteTaskType = {
-  type: 'DELETE';
+  type: 'DELETE'
   payload: {
     id: string
-  };
+  }
 }
 
 type ResetTaskType = {
-  type: 'RESET';
-  payload: TaskType[];
+  type: 'RESET'
+  payload: TaskType[]
 }
 
 type TaskType = {
-  id: string;
-  title: string;
-  description: string;
-  status: TaskStatus;
+  id: string
+  title: string
+  description: string
+  status: TaskStatus
 }
 
 type AlertTextType = {
-  title: string;
-  detailMessage: string;
+  title: string
+  detailMessage: string
   cbFunction: () => void
 }
 

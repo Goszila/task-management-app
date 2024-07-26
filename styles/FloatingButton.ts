@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native"
 
 export default StyleSheet.create({
   button: {
@@ -9,4 +9,4 @@ export default StyleSheet.create({
     borderRadius: 50,
     padding: 16,
   },
-});
+})

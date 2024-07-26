@@ -4,7 +4,7 @@ import reducer from './reducer'
 export const DataContext = React.createContext<{
   tasks: TaskType[]
   dispatch: Dispatch<ActionType>
-}>({ tasks: [], dispatch: () => { } });
+}>({ tasks: [], dispatch: () => { } })
 
 type PropsType = {
   children: React.ReactNode

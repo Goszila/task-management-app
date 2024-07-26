@@ -1,14 +1,14 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
-import TaskList from './screens/TaskList';
-import { FontAwesome6 } from '@expo/vector-icons';
-import TaskProvider from './context/TaskProvider';
-import TaskDetail from './screens/TaskDetail';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
+import TaskList from './screens/TaskList'
+import { FontAwesome6 } from '@expo/vector-icons'
+import TaskProvider from './context/TaskProvider'
+import TaskDetail from './screens/TaskDetail'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator()
 
-const SettingsStack = createNativeStackNavigator();
+const SettingsStack = createNativeStackNavigator()
 
 function TodoStackScreen() {
   return (
@@ -17,7 +17,7 @@ function TodoStackScreen() {
       <SettingsStack.Screen name="NEW" component={TaskDetail} options={{ headerBackTitle: 'BACK' }} />
       <SettingsStack.Screen name="DETAIL" component={TaskDetail} options={{ headerBackTitle: 'BACK' }} />
     </SettingsStack.Navigator>
-  );
+  )
 }
 
 function InProgressStackScreen() {
@@ -26,7 +26,7 @@ function InProgressStackScreen() {
       <SettingsStack.Screen name="inprogress" component={TaskList} options={{ headerShown: false }} />
       <SettingsStack.Screen name="DETAIL" component={TaskDetail} options={{ headerBackTitle: 'BACK' }} />
     </SettingsStack.Navigator>
-  );
+  )
 }
 
 function DoneStackScreen() {
@@ -35,7 +35,7 @@ function DoneStackScreen() {
       <SettingsStack.Screen name="done" component={TaskList} options={{ headerShown: false }} />
       <SettingsStack.Screen name="DETAIL" component={TaskDetail} options={{ headerBackTitle: 'BACK' }} />
     </SettingsStack.Navigator>
-  );
+  )
 }
 
 export default function App() {
@@ -76,5 +76,5 @@ export default function App() {
         </Tab.Navigator>
       </NavigationContainer>
     </TaskProvider >
-  );
+  )
 }

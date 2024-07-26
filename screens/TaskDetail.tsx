@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useCreateTask, useDeleteTask, useUpdateTask } from '../hooks'
 import { DataContext } from '../context/TaskProvider'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { Picker } from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker'
 import ResponseAlert from '../components/ResponseAlert'
 import ConfirmModal from '../components/ConfirmModal'
 import styles from '../styles/TaskDetail'
