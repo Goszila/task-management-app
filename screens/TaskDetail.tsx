@@ -7,6 +7,7 @@ import { Picker } from '@react-native-picker/picker';
 import ResponseAlert from '../components/ResponseAlert'
 import ConfirmModal from '../components/ConfirmModal'
 import styles from '../styles/TaskDetail'
+import { getStatusName } from '../utils/movementStatus'
 
 type TaskDetailType = {
   route: any
@@ -115,7 +116,7 @@ export default function TaskDetail({ route, navigation }: TaskDetailType) {
     <SafeAreaView style={styles.container}>
       {id && (
         <View style={styles.statusbar}>
-          <Text style={styles.statusbarText}>STATUS: {status}</Text>
+          <Text style={styles.statusbarText}>STATUS: {getStatusName(status)}</Text>
         </View>
       )}
       <View style={styles.form}>
