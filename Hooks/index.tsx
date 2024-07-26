@@ -1,9 +1,9 @@
 import { Dispatch, useContext } from 'react'
-import { DataContext } from '../context/TaskProvider'
 import { uuidV4 } from '../utils/uuid'
 import { Text } from 'react-native'
+import { DataContext } from '../context/TaskProvider'
 
-export const useGetTasks = ({ status }: { status: TaskStatus }): TaskType[] => {
+export const useGetContextTasks = ({ status }: { status?: TaskStatus }): TaskType[] => {
   const {
     tasks
   }: { tasks: TaskType[] } = useContext(DataContext)
@@ -30,8 +30,8 @@ type UseUpdateTaskType = {
   dispatch: Dispatch<ActionType>
 } & TaskType
 
-export const useUpdateTask = (props: UseUpdateTaskType) => {
-  return props.dispatch({
+export const useUpdateTask = async (props: UseUpdateTaskType): Promise<void> => {
+  props.dispatch({
     type: 'UPDATE',
     payload: {
       id: props.id,
@@ -47,7 +47,7 @@ export const useTruncateText = (text: string, maxLength: number) => {
     return (
       <Text>
         {text.substring(0, maxLength)}
-        <Text style={{ fontWeight: 'bold' }}> .
+        <Text style={{ fontWeight: 'bold' }}>
           ..more
         </Text>
       </Text>

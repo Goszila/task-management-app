@@ -1,4 +1,4 @@
-type ActionType = AddTaskType | UpdateTaskType | DeleteTaskType
+type ActionType = AddTaskType | UpdateTaskType | DeleteTaskType | ResetTaskType
 
 type AddTaskType = {
   type: 'ADD';
@@ -19,6 +19,11 @@ type DeleteTaskType = {
   payload: {
     id: string
   };
+}
+
+type ResetTaskType = {
+  type: 'RESET';
+  payload: TaskType[];
 }
 
 type TaskType = {

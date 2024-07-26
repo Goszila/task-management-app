@@ -33,7 +33,7 @@ export default function TaskDetail({ route, navigation }: TaskDetailType) {
     }
   }, [])
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     if (formError) {
       setFormError(true)
       return

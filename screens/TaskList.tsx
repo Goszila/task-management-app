@@ -1,10 +1,12 @@
 import { FlatList, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import TaskCard from '../components/TaskCard'
-import { useGetTasks } from '../hooks'
+import { useGetContextTasks } from '../hooks'
 import FloatingButton from '../components/FloatingButton'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import styles from '../styles/TaskList'
+import { DataContext } from '../context/TaskProvider'
+import { useGetTasks } from '../hooks/useStorage'
 
 type TaskDetailType = {
   route: any,
@@ -13,7 +15,18 @@ type TaskDetailType = {
 
 export default function TaskList({ navigation, route }: TaskDetailType) {
   const status: TaskStatus = (route?.name || '').toUpperCase()
-  const tasks = useGetTasks({ status })
+  const { dispatch } = useContext(DataContext)
+
+  const resetTasks = async () => {
+    dispatch({ type: 'RESET', payload: await useGetTasks() })
+  }
+
+  useEffect(() => {
+    resetTasks()
+  }, [])
+
+  const tasks = useGetContextTasks({ status })
+
 
   return (
     <View style={styles.container}>
