@@ -45,10 +45,11 @@ export default function TaskCard({ navigation, payload }: TaskCardPropsType) {
   }
 
   const HandleMoveStatus = () => {
-    const nexStatus = forwardStatus(status)
+    const nextStatus = forwardStatus(status)
+    if (nextStatus === undefined) return
     ConfirmModal({
       title: 'Confirm',
-      detailMessage: `Are you sure you want to move this task to ${nexStatus.name}?`,
+      detailMessage: `Are you sure you want to move this task to ${nextStatus.name}?`,
       cbFunction: () => { },
       confirmFunction: () => {
         useUpdateTask({
@@ -56,7 +57,7 @@ export default function TaskCard({ navigation, payload }: TaskCardPropsType) {
           id: payload.id,
           title,
           description,
-          status: nexStatus.value
+          status: nextStatus.value
         })
       }
     })
