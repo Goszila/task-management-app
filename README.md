@@ -8,7 +8,7 @@ git clone https://github.com/Goszila/task-management-app.git
 
 2. Go to project folder.
 ```
-cd /task-management-app
+cd task-management-app
 ```
 
 
